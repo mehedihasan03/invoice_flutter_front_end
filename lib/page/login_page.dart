@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:invoice_flutter/page/dashboard.dart';
+import 'package:invoice_flutter/page/dashboard_page.dart';
 import 'package:invoice_flutter/page/model/login.dart';
 import 'package:invoice_flutter/page/sign_up_page.dart';
 
@@ -60,6 +60,8 @@ class _LoginPageState extends State<LoginPage> {
         title: const Text(
             "Login"
         ),
+        elevation: .1,
+        backgroundColor: Color.fromRGBO(49, 87, 110, 1.0),
       ),
       body: Padding(
           padding: const EdgeInsets.all(10),
@@ -73,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.w900,
-                        fontSize: 50),
+                        fontSize: 40),
                   )
               ),
 

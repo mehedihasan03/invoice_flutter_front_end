@@ -14,6 +14,8 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Dashboard"),
+        elevation: .1,
+        backgroundColor: Color.fromRGBO(49, 87, 110, 1.0),
       ),
     );
   }
