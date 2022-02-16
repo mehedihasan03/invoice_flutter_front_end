@@ -1,5 +1,13 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:invoice_flutter/page/dashboard.dart';
+import 'package:invoice_flutter/page/model/login.dart';
 import 'package:invoice_flutter/page/sign_up_page.dart';
+
+import '../helper/http_helper.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -10,8 +18,40 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final _http = HttpHelper();
+
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  Future<void> loginUser() async {
+    String username = _usernameController.value.text;
+    String password = _passwordController.value.text;
+
+    var model = Login(username: username, password: password);
+
+    String _body = jsonEncode(model.toMap());
+
+    try {
+      final response =
+          await _http.postData('http://192.168.0.109:9988/login', _body);
+      print(response.toString());
+
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Dashboard()));
+
+
+    } catch (e) {
+      log(e.toString());
+      Fluttertoast.showToast(
+          msg: "$e",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 padding: const EdgeInsets.all(30),
                 child: TextField(
-                  controller: nameController,
+                  controller: _usernameController,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Username',
@@ -52,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.fromLTRB(30, 5, 30, 0),
                 child: TextField(
                   obscureText: true,
-                  controller: passwordController,
+                  controller: _passwordController,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Password',
@@ -79,8 +119,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     onPressed: () {
-                      print(nameController.text);
-                      print(passwordController.text);
+                      print(_usernameController.text);
+                      print(_passwordController.text);
+                      loginUser();
                     },
                   )
               ),
@@ -104,6 +145,9 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+
+
 }
 
 
