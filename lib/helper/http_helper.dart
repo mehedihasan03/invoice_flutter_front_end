@@ -56,7 +56,7 @@ class HttpHelper {
         var data = responseJson['message'];
         log("error: " + data.toString());
         throw FetchDataException(
-            'access to the target resource has been denied');
+            'Username or Password does not match');
       case 401:
       //TokenHandler.refreshToken();
         Map<dynamic, dynamic> responseJson = json.decode(response.body);

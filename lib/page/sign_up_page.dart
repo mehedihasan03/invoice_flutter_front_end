@@ -41,8 +41,15 @@ class _SignUpPageState extends State<SignUpPage> {
 
       try {
         final response =
-            await _http.postData('http://192.168.0.109:9988/user/save', _body);
-        print(response.toString());
+            await _http.postData('http://192.168.1.85:9988/user/save', _body);
+        Fluttertoast.showToast(
+            msg: "Login Successful",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 3,
+            fontSize: 20,
+            backgroundColor: Colors.green
+        );
       } catch (e) {
         log(e.toString());
         Fluttertoast.showToast(
