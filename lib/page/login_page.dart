@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
           await _http.postData('http://192.168.1.85:9988/login', _body);
       print(response.toString());
 
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Dashboard()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const Dashboard()));
 
 
     } catch (e) {

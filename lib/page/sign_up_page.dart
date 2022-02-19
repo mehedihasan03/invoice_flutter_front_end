@@ -42,8 +42,9 @@ class _SignUpPageState extends State<SignUpPage> {
       try {
         final response =
             await _http.postData('http://192.168.1.85:9988/user/save', _body);
+        sendEmail();
         Fluttertoast.showToast(
-            msg: "Login Successful",
+            msg: "User Created Successfully",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
@@ -232,5 +233,39 @@ class _SignUpPageState extends State<SignUpPage> {
             ],
           ),
         ));
+  }
+
+  Future<void> sendEmail() async {
+    String email = _emailController.value.text;
+
+    Map _data = {
+      'receiver': jsonEncode(email)
+    };
+    //encode Map to JSON
+    String _body = json.encode(_data);
+
+    try {
+      final response =
+          await _http.postData('http://192.168.1.85:9988/sendUserEmail', _body);
+      Fluttertoast.showToast(
+          msg: "Email send successfully",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 3,
+          fontSize: 20,
+          backgroundColor: Colors.green
+      );
+    } catch (e) {
+      log(e.toString());
+      Fluttertoast.showToast(
+          msg: "$e",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+
   }
 }
