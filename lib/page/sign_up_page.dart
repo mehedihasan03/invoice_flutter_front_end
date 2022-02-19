@@ -41,7 +41,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
       try {
         final response =
-            await _http.postData('http://192.168.1.85:9988/user/save', _body);
+            await _http.postData('http://192.168.0.104:9988/user/save', _body);
         sendEmail();
         Fluttertoast.showToast(
             msg: "User Created Successfully",
