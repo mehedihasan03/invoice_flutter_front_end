@@ -13,9 +13,27 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dashboard"),
-        elevation: .1,
-        backgroundColor: const Color.fromRGBO(49, 87, 110, 1.0),
+        leading: Icon(Icons.menu),
+        title: Text('Dashboard'),
+        actions: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: IconButton(
+                onPressed: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (_) => SearchPage())),
+                icon: Icon(Icons.search))
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Icon(Icons.print_sharp),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Icon(Icons.fullscreen),
+          ),
+          Icon(Icons.more_vert),
+        ],
+        backgroundColor: Colors.purple,
       ),
       body: Column(
         children: [
@@ -40,54 +58,58 @@ class _DashboardState extends State<Dashboard> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               )),
               Center(
-                child: DataTable(
-                  columns: [
-                    DataColumn(
-                        label: Text('ID',
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold))),
-                    DataColumn(
-                        label: Text('Name',
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold))),
-                    DataColumn(
-                        label: Text('Date',
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold))),
-                    DataColumn(
-                        label: Text('Account Name',
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold))),
-                    DataColumn(
-                        label: Text('Amount',
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold))),
-                  ],
-                  rows: [
-                    DataRow(cells: [
-                      DataCell(Text('1')),
-                      DataCell(Text('Stephen')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Stephen')),
-                      DataCell(Text('Actor')),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('5')),
-                      DataCell(Text('John')),
-                      DataCell(Text('Student')),
-                      DataCell(Text('Stephen')),
-                      DataCell(Text('Actor')),
-                    ])
-                  ],
+                child: Flexible(
+                  child: DataTable(
+                    columns: [
+                      DataColumn(
+                          label: Text('ID',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold))),
+                      DataColumn(
+                          label: Text('Name',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold))),
+                      DataColumn(
+                          label: Text('Date',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold))),
+                      DataColumn(
+                          label: Text('Account Name',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold))),
+                      DataColumn(
+                          label: Text('Amount',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold))),
+                    ],
+                    rows: [
+                      DataRow(cells: [
+                        DataCell(Text('1')),
+                        DataCell(Text('Stephen')),
+                        DataCell(Text('Actor')),
+                        DataCell(Text('Stephen')),
+                        DataCell(Text('Actor')),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text('5')),
+                        DataCell(Text('John')),
+                        DataCell(Text('Student')),
+                        DataCell(Text('Stephen')),
+                        DataCell(Text('Actor')),
+                      ])
+                    ],
+                  ),
                 ),
               ),
             ]),
-          )
+          ),
         ],
       ),
     );
   }
 }
+
+
 
 Card makeDashboardItem(String title, IconData icon) {
   return Card(
@@ -121,4 +143,40 @@ Card makeDashboardItem(String title, IconData icon) {
       ),
     ),
   );
+}
+
+
+
+class SearchPage extends StatelessWidget {
+  const SearchPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        // The search area here
+          title: Container(
+            width: double.infinity,
+            height: 40,
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(5)),
+            child: Center(
+              child: TextField(
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.clear),
+                      onPressed: () {
+                        /* Clear the search field */
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Dashboard()));
+
+                      },
+                    ),
+                    hintText: 'Search...',
+                    border: InputBorder.none),
+              ),
+            ),
+          )),
+    );
+  }
 }
