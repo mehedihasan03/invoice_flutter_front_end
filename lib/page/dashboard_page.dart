@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:invoice_flutter/page/login_page.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -13,34 +14,67 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.menu),
         title: Text('Dashboard'),
         actions: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: EdgeInsets.symmetric(horizontal: 5),
             child: IconButton(
                 onPressed: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (_) => SearchPage())),
                 icon: Icon(Icons.search))
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: EdgeInsets.symmetric(horizontal: 5),
             child: Icon(Icons.print_sharp),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: EdgeInsets.symmetric(horizontal: 5),
             child: Icon(Icons.fullscreen),
           ),
-          Icon(Icons.more_vert),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: IconButton(
+              icon: Icon(Icons.logout),
+
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPage()));
+              },
+            ),
+          ),
         ],
-        backgroundColor: Colors.purple,
+        backgroundColor: Color.fromRGBO(49, 87, 110, 1.0),
+      ),
+      drawer: Drawer(
+        child: ListView(
+
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Color.fromRGBO(49, 87, 110, 1.0),
+              ),
+              child: Text(
+                  'Dashboard',
+                style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.w800, color: Colors.white),
+              ),
+            ),
+            ListTile(
+              title: Text("Ttem 1"),
+              trailing: Icon(Icons.arrow_forward),
+            ),
+            ListTile(
+              title: Text("Item 2"),
+              trailing: Icon(Icons.arrow_forward),
+            ),
+          ],
+        ),
       ),
       body: Column(
         children: [
           Expanded(
             child: GridView.count(
               crossAxisCount: 2,
-              padding: EdgeInsets.all(5.0),
+              padding: EdgeInsets.all(10.0),
               children: <Widget>[
                 makeDashboardItem("Total Invoice", Icons.receipt),
                 makeDashboardItem("Today Invoice", Icons.receipt),
@@ -154,6 +188,7 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(49, 87, 110, 1.0),
         // The search area here
           title: Container(
             width: double.infinity,
