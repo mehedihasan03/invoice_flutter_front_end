@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:invoice_flutter/page/create_invoice_page.dart';
+import 'package:invoice_flutter/page/invoice_list_page.dart';
 import 'package:invoice_flutter/page/login_page.dart';
 
 class Dashboard extends StatefulWidget {
@@ -46,7 +48,6 @@ class _DashboardState extends State<Dashboard> {
       ),
       drawer: Drawer(
         child: ListView(
-
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
@@ -57,14 +58,35 @@ class _DashboardState extends State<Dashboard> {
                   'Dashboard',
                 style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.w800, color: Colors.white),
               ),
+
             ),
+        ListTile(
+          title: Row(
+            children: <Widget>[
+              Icon(Icons.account_balance_wallet_outlined),
+              Padding(
+                padding: EdgeInsets.only(left: 15.0),
+                child: Text("Create Invoice"),
+              )
+            ],
+          ),
+          onTap: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CreateInviocePage()));
+          },
+        ),
             ListTile(
-              title: Text("Ttem 1"),
-              trailing: Icon(Icons.arrow_forward),
-            ),
-            ListTile(
-              title: Text("Item 2"),
-              trailing: Icon(Icons.arrow_forward),
+              title: Row(
+                children: <Widget>[
+                  Icon(Icons.list_alt_outlined),
+                  Padding(
+                    padding: EdgeInsets.only(left: 15.0),
+                    child: Text("Invoices"),
+                  )
+                ],
+              ),
+              onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InvoiceListPage()));
+              },
             ),
           ],
         ),
