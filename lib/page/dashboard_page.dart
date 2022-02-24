@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invoice_flutter/page/create_invoice_page.dart';
 import 'package:invoice_flutter/page/invoice_list_page.dart';
-import 'package:invoice_flutter/page/login_page.dart';
+
+import '../helper/http_helper.dart';
+import 'model/totalInvoiceCount.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -12,40 +16,32 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final _http = new HttpHelper();
+  var totalInvoiceCount;
+
+  getInvoiceCount() async {
+    final res = await _http.getData("http://192.168.0.104:9988/invoice/count-invoice");
+    if (res.statusCode == 200) {
+      totalInvoiceCount = jsonEncode(res.body);
+      print(totalInvoiceCount);
+      print("console printed");
+      setState(() {
+        this.totalInvoiceCount;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    getInvoiceCount();
+    super.initState();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Dashboard'),
-      //   actions: [
-      //     Padding(
-      //       padding: EdgeInsets.symmetric(horizontal: 5),
-      //       child: IconButton(
-      //           onPressed: () => Navigator.of(context)
-      //               .push(MaterialPageRoute(builder: (_) => SearchPage())),
-      //           icon: Icon(Icons.search))
-      //     ),
-      //     Padding(
-      //       padding: EdgeInsets.symmetric(horizontal: 5),
-      //       child: Icon(Icons.print_sharp),
-      //     ),
-      //     Padding(
-      //       padding: EdgeInsets.symmetric(horizontal: 5),
-      //       child: Icon(Icons.fullscreen),
-      //     ),
-      //     Padding(
-      //       padding: EdgeInsets.symmetric(horizontal: 10),
-      //       child: IconButton(
-      //         icon: Icon(Icons.logout),
-      //
-      //         onPressed: () {
-      //           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPage()));
-      //         },
-      //       ),
-      //     ),
-      //   ],
-      //   backgroundColor: Color.fromRGBO(49, 87, 110, 1.0),
-      // ),
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
@@ -55,25 +51,28 @@ class _DashboardState extends State<Dashboard> {
                 color: Color.fromRGBO(49, 87, 110, 1.0),
               ),
               child: Text(
-                  'Dashboard',
-                style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.w800, color: Colors.white),
+                'Dashboard',
+                style: TextStyle(
+                    fontSize: 40.0,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white),
               ),
-
             ),
-        ListTile(
-          title: Row(
-            children: <Widget>[
-              Icon(Icons.account_balance_wallet_outlined),
-              Padding(
-                padding: EdgeInsets.only(left: 15.0),
-                child: Text("Create Invoice"),
-              )
-            ],
-          ),
-          onTap: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CreateInviocePage()));
-          },
-        ),
+            ListTile(
+              title: Row(
+                children: <Widget>[
+                  Icon(Icons.account_balance_wallet_outlined),
+                  Padding(
+                    padding: EdgeInsets.only(left: 15.0),
+                    child: Text("Create Invoice"),
+                  )
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CreateInviocePage()));
+              },
+            ),
             ListTile(
               title: Row(
                 children: <Widget>[
@@ -84,8 +83,9 @@ class _DashboardState extends State<Dashboard> {
                   )
                 ],
               ),
-              onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InvoiceListPage()));
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => InvoiceListPage()));
               },
             ),
           ],
@@ -105,7 +105,9 @@ class _DashboardState extends State<Dashboard> {
               ],
             ),
           ),
-          SizedBox(height: 15.0,),
+          SizedBox(
+            height: 15.0,
+          ),
           Expanded(
             child: ListView(children: <Widget>[
               Center(
@@ -165,8 +167,6 @@ class _DashboardState extends State<Dashboard> {
   }
 }
 
-
-
 Card makeDashboardItem(String title, IconData icon) {
   return Card(
     elevation: 20.0,
@@ -174,7 +174,8 @@ Card makeDashboardItem(String title, IconData icon) {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
     margin: const EdgeInsets.all(8.0),
     child: Container(
-      decoration: const BoxDecoration(color: Color.fromRGBO(255, 142, 0, 1.0)),
+      decoration:
+          const BoxDecoration(color: Color.fromRGBO(116, 255, 226, 1.0)),
       child: InkWell(
         onTap: () {},
         child: Column(
@@ -189,7 +190,12 @@ Card makeDashboardItem(String title, IconData icon) {
               size: 40.0,
               color: Colors.black,
             )),
-            const SizedBox(height: 10.0),
+            const SizedBox(height: 15.0),
+            Center(
+              child: Text(title,
+                  style: const TextStyle(fontSize: 20.0, color: Colors.black)),
+            ),
+            const SizedBox(height: 15.0),
             Center(
               child: Text(title,
                   style: const TextStyle(fontSize: 20.0, color: Colors.black)),
@@ -200,6 +206,3 @@ Card makeDashboardItem(String title, IconData icon) {
     ),
   );
 }
-
-
-
