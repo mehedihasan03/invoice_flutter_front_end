@@ -6,8 +6,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:invoice_flutter/page/dashboard_page.dart';
 import 'package:invoice_flutter/page/model/login.dart';
 import 'package:invoice_flutter/page/sign_up_page.dart';
+import 'package:invoice_flutter/utils/routes.dart';
 
 import '../helper/http_helper.dart';
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -36,8 +38,10 @@ class _LoginPageState extends State<LoginPage> {
           await _http.postData('http://192.168.1.85:9988/login', _body);
       print(response.toString());
 
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const Dashboard()));
-
+        // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const Dashboard()));
+      // Navigator.of(context)
+      //     .push(MaterialPageRoute(builder: (context) => HomePage()));
+      Navigator.pushNamed(context, MyRoutes.homeRoute);
 
     } catch (e) {
       log(e.toString());
@@ -136,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(fontSize: 15),
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SignUpPage()));
+                      Navigator.pushNamed(context, MyRoutes.signupRoute);
                     },
                   )
                 ],

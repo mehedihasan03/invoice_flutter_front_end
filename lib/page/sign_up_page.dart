@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:invoice_flutter/helper/http_helper.dart';
 import 'package:invoice_flutter/page/model/user.dart';
+import 'package:invoice_flutter/utils/routes.dart';
 
 import 'login_page.dart';
 
@@ -223,8 +224,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       style: TextStyle(fontSize: 15),
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => LoginPage()));
+                      Navigator.pushNamed(context, MyRoutes.loginRoute);
                     },
                   )
                 ],

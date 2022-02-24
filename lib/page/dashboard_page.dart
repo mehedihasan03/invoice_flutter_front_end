@@ -15,37 +15,37 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Dashboard'),
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            child: IconButton(
-                onPressed: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (_) => SearchPage())),
-                icon: Icon(Icons.search))
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            child: Icon(Icons.print_sharp),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            child: Icon(Icons.fullscreen),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: IconButton(
-              icon: Icon(Icons.logout),
-
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPage()));
-              },
-            ),
-          ),
-        ],
-        backgroundColor: Color.fromRGBO(49, 87, 110, 1.0),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Dashboard'),
+      //   actions: [
+      //     Padding(
+      //       padding: EdgeInsets.symmetric(horizontal: 5),
+      //       child: IconButton(
+      //           onPressed: () => Navigator.of(context)
+      //               .push(MaterialPageRoute(builder: (_) => SearchPage())),
+      //           icon: Icon(Icons.search))
+      //     ),
+      //     Padding(
+      //       padding: EdgeInsets.symmetric(horizontal: 5),
+      //       child: Icon(Icons.print_sharp),
+      //     ),
+      //     Padding(
+      //       padding: EdgeInsets.symmetric(horizontal: 5),
+      //       child: Icon(Icons.fullscreen),
+      //     ),
+      //     Padding(
+      //       padding: EdgeInsets.symmetric(horizontal: 10),
+      //       child: IconButton(
+      //         icon: Icon(Icons.logout),
+      //
+      //         onPressed: () {
+      //           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPage()));
+      //         },
+      //       ),
+      //     ),
+      //   ],
+      //   backgroundColor: Color.fromRGBO(49, 87, 110, 1.0),
+      // ),
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
@@ -203,37 +203,3 @@ Card makeDashboardItem(String title, IconData icon) {
 
 
 
-class SearchPage extends StatelessWidget {
-  const SearchPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(49, 87, 110, 1.0),
-        // The search area here
-          title: Container(
-            width: double.infinity,
-            height: 40,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(5)),
-            child: Center(
-              child: TextField(
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.clear),
-                      onPressed: () {
-                        /* Clear the search field */
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Dashboard()));
-
-                      },
-                    ),
-                    hintText: 'Search...',
-                    border: InputBorder.none),
-              ),
-            ),
-          )),
-    );
-  }
-}
