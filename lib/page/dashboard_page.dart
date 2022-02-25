@@ -17,27 +17,19 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   final _http = new HttpHelper();
-  var totalInvoiceCount;
-
-  getInvoiceCount() async {
-    final res = await _http.getData("http://192.168.0.104:9988/invoice/count-invoice");
-    if (res.statusCode == 200) {
-      totalInvoiceCount = jsonEncode(res.body);
-      print(totalInvoiceCount);
-      print("console printed");
-      setState(() {
-        this.totalInvoiceCount;
-      });
-    }
-  }
+  var totalInvoice;
+  var todayInvoices;
+  var monthlySale;
+  var dailySale;
 
   @override
   void initState() {
-    getInvoiceCount();
+    getTotalInvoice();
+    getTodayInvoices();
+    getMonthlySale();
+    getDailySale();
     super.initState();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -98,10 +90,13 @@ class _DashboardState extends State<Dashboard> {
               crossAxisCount: 2,
               padding: EdgeInsets.all(10.0),
               children: <Widget>[
-                makeDashboardItem("Total Invoice", Icons.receipt),
-                makeDashboardItem("Today Invoice", Icons.receipt),
-                makeDashboardItem("Monthly Sale", Icons.attach_money),
-                makeDashboardItem("Daily Sale", Icons.attach_money)
+                makeDashboardItem(
+                    "Total Invoice ", Icons.receipt, totalInvoice),
+                makeDashboardItem(
+                    "Today Invoice", Icons.receipt, todayInvoices),
+                makeDashboardItem(
+                    "Monthly Sale", Icons.attach_money, monthlySale),
+                makeDashboardItem("Daily Sale", Icons.attach_money, dailySale)
               ],
             ),
           ),
@@ -165,14 +160,66 @@ class _DashboardState extends State<Dashboard> {
       ),
     );
   }
+
+  Future<void> getTotalInvoice() async {
+    final res =
+        await _http.getData("http://192.168.0.104:9988/invoice/count-invoice");
+    if (res.statusCode == 200) {
+      Map<String, dynamic> map = jsonDecode(res.body);
+      print(map['Data']);
+      print("Total invoice console printed");
+      setState(() {
+        totalInvoice = map['Data'];
+      });
+    }
+  }
+
+  Future<void> getTodayInvoices() async {
+    final res =
+        await _http.getData("http://192.168.0.104:9988/invoice/count-today-invoices");
+    if (res.statusCode == 200) {
+      Map<String, dynamic> map = jsonDecode(res.body);
+      print(map['Data']);
+      print("Today Invoice console printed");
+      setState(() {
+        todayInvoices = map['Data'];
+      });
+    }
+  }
+
+  Future<void> getMonthlySale() async {
+    final res =
+        await _http.getData("http://192.168.0.104:9988/invoice/current-sale");
+    if (res.statusCode == 200) {
+      Map<String, dynamic> map = jsonDecode(res.body);
+      print(map['Data']);
+      print("Monthly Sale console printed");
+      setState(() {
+        monthlySale = map['Data'];
+      });
+    }
+  }
+
+  Future<void> getDailySale() async {
+    final res =
+        await _http.getData("http://192.168.0.104:9988/invoice/count-daily-sale");
+    if (res.statusCode == 200) {
+      Map<String, dynamic> map = jsonDecode(res.body);
+      print(map['Data']);
+      print("Daily Sale console printed");
+      setState(() {
+        dailySale = map['Data'];
+      });
+    }
+  }
 }
 
-Card makeDashboardItem(String title, IconData icon) {
+Card makeDashboardItem(String title, IconData icon, count) {
   return Card(
     elevation: 20.0,
     shadowColor: Colors.orange,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-    margin: const EdgeInsets.all(8.0),
+    margin: const EdgeInsets.all(20.0),
     child: Container(
       decoration:
           const BoxDecoration(color: Color.fromRGBO(116, 255, 226, 1.0)),
@@ -183,11 +230,11 @@ Card makeDashboardItem(String title, IconData icon) {
           mainAxisSize: MainAxisSize.min,
           verticalDirection: VerticalDirection.down,
           children: <Widget>[
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 40.0),
             Center(
                 child: Icon(
               icon,
-              size: 40.0,
+              size: 60.0,
               color: Colors.black,
             )),
             const SizedBox(height: 15.0),
@@ -197,8 +244,8 @@ Card makeDashboardItem(String title, IconData icon) {
             ),
             const SizedBox(height: 15.0),
             Center(
-              child: Text(title,
-                  style: const TextStyle(fontSize: 20.0, color: Colors.black)),
+              child: Text(count.toString(),
+                  style: const TextStyle(fontSize: 34.0, fontWeight: FontWeight.w700, color: Colors.black)),
             )
           ],
         ),
