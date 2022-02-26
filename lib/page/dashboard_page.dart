@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:invoice_flutter/page/create_invoice_page.dart';
 import 'package:invoice_flutter/page/invoice_list_page.dart';
+import 'package:invoice_flutter/page/model/invoice.dart';
 
 import '../helper/http_helper.dart';
 import 'model/totalInvoiceCount.dart';
@@ -21,7 +22,7 @@ class _DashboardState extends State<Dashboard> {
   var todayInvoices;
   var monthlySale;
   var dailySale;
-  var invoices;
+  List<Invoice> invoices = [];
 
   @override
   void initState() {
@@ -107,57 +108,53 @@ class _DashboardState extends State<Dashboard> {
             height: 15.0,
           ),
           Expanded(
-            child: ListView(children: <Widget>[
-              Center(
-                  child: Text(
-                'Invoices',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              )),
-              Center(
-                child: Flexible(
-                  child: DataTable(
-                    columns: [
-                      DataColumn(
-                          label: Text('ID',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold))),
-                      DataColumn(
-                          label: Text('Name',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold))),
-                      DataColumn(
-                          label: Text('Date',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold))),
-                      DataColumn(
-                          label: Text('Account Name',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold))),
-                      DataColumn(
-                          label: Text('Amount',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold))),
-                    ],
-                    rows: [
-                      DataRow(cells: [
-                        DataCell(Text('1')),
-                        DataCell(Text('Stephen')),
-                        DataCell(Text('Actor')),
-                        DataCell(Text('Stephen')),
-                        DataCell(Text('Actor')),
-                      ]),
-                      DataRow(cells: [
-                        DataCell(Text('5')),
-                        DataCell(Text('John')),
-                        DataCell(Text('Student')),
-                        DataCell(Text('Stephen')),
-                        DataCell(Text('Actor')),
-                      ])
-                    ],
+            child: Container(
+              child: ListView(children: <Widget>[
+                Center(
+                    child: Text(
+                  'Invoices',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                )),
+                Center(
+                  child: Flexible(
+                    child: DataTable(
+                      columns: [
+                        DataColumn(
+                            label: Text('ID',
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold))),
+                        DataColumn(
+                            label: Text('Name',
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold))),
+                        DataColumn(
+                            label: Text('Date',
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold))),
+                        DataColumn(
+                            label: Text('Account Name',
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold))),
+                        DataColumn(
+                            label: Text('Amount',
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold))),
+                      ],
+                      rows: [
+                        for(int i = 0; i < invoices.length; i++)
+                        DataRow(cells: [
+                          DataCell(Text(invoices[i].id.toString())),
+                          DataCell(Text(invoices[i].customerName)),
+                          DataCell(Text(invoices[i].paymentDate)),
+                          DataCell(Text(invoices[i].accountNumber)),
+                          DataCell(Text(invoices[i].totalPrice.toString())),
+                        ])
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ]),
+              ]),
+            ),
           ),
         ],
       ),
@@ -166,7 +163,7 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getTotalInvoice() async {
     final res =
-        await _http.getData("http://192.168.1.85:9988/invoice/count-invoice");
+        await _http.getData("http://192.168.0.106:9988/invoice/count-invoice");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
@@ -179,7 +176,7 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getTodayInvoices() async {
     final res =
-        await _http.getData("http://192.168.1.85:9988/invoice/count-today-invoices");
+        await _http.getData("http://192.168.0.106:9988/invoice/count-today-invoices");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
@@ -192,7 +189,7 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getMonthlySale() async {
     final res =
-        await _http.getData("http://192.168.1.85:9988/invoice/current-sale");
+        await _http.getData("http://192.168.0.106:9988/invoice/current-sale");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
@@ -205,7 +202,7 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getDailySale() async {
     final res =
-        await _http.getData("http://192.168.1.85:9988/invoice/count-daily-sale");
+        await _http.getData("http://192.168.0.106:9988/invoice/count-daily-sale");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
@@ -218,13 +215,14 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getInvoiceData() async {
     final res =
-        await _http.getData("http://192.168.1.85:9988/invoice/getAll");
+        await _http.getData("http://192.168.0.106:9988/invoice/getAll");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
+
       print("Invoice list console printed");
       setState(() {
-        invoices = map['Data'];
+        invoices = Invoice.fromMap(map['Data']) as List<Invoice>;
       });
     }
   }
@@ -233,12 +231,12 @@ class _DashboardState extends State<Dashboard> {
 Card makeDashboardItem(String title, IconData icon, count) {
   return Card(
     elevation: 20.0,
-    shadowColor: Colors.orange,
+    shadowColor: Colors.black45,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
     margin: const EdgeInsets.all(20.0),
     child: Container(
       decoration:
-          const BoxDecoration(color: Color.fromRGBO(116, 255, 226, 1.0)),
+          const BoxDecoration(color: Color.fromRGBO(0, 72, 255, 1.0)),
       child: InkWell(
         onTap: () {},
         child: Column(

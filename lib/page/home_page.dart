@@ -96,8 +96,6 @@ class _HomePageState extends State<HomePage> {
           menuItem(3, "Invoices", Icons.event,
               currentPage == DrawerSections.invoice_list ? true : false),
           Divider(),
-
-
         ],
       ),
     );
