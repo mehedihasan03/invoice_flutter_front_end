@@ -3,6 +3,7 @@ import 'package:invoice_flutter/page/create_invoice_page.dart';
 import 'package:invoice_flutter/page/invoice_list_page.dart';
 import 'package:invoice_flutter/utils/routes.dart';
 
+import 'bottom_navigation_page.dart';
 import 'dashboard_page.dart';
 import 'drawer_header_page.dart';
 import 'login_page.dart';
@@ -14,6 +15,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var currentPage = DrawerSections.dashboard;
+  int _selectedIndex = 0;
+  List<Widget> pages = [
+    Dashboard(),
+    CreateInviocePage(),
+
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +77,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavigation(),
     );
   }
 

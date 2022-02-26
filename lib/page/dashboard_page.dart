@@ -21,6 +21,7 @@ class _DashboardState extends State<Dashboard> {
   var todayInvoices;
   var monthlySale;
   var dailySale;
+  var invoices;
 
   @override
   void initState() {
@@ -28,6 +29,7 @@ class _DashboardState extends State<Dashboard> {
     getTodayInvoices();
     getMonthlySale();
     getDailySale();
+    getInvoiceData();
     super.initState();
   }
 
@@ -96,7 +98,8 @@ class _DashboardState extends State<Dashboard> {
                     "Today Invoice", Icons.receipt, todayInvoices),
                 makeDashboardItem(
                     "Monthly Sale", Icons.attach_money, monthlySale),
-                makeDashboardItem("Daily Sale", Icons.attach_money, dailySale)
+                makeDashboardItem(
+                    "Daily Sale", Icons.attach_money, dailySale)
               ],
             ),
           ),
@@ -163,7 +166,7 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getTotalInvoice() async {
     final res =
-        await _http.getData("http://192.168.0.104:9988/invoice/count-invoice");
+        await _http.getData("http://192.168.1.85:9988/invoice/count-invoice");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
@@ -176,7 +179,7 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getTodayInvoices() async {
     final res =
-        await _http.getData("http://192.168.0.104:9988/invoice/count-today-invoices");
+        await _http.getData("http://192.168.1.85:9988/invoice/count-today-invoices");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
@@ -189,7 +192,7 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getMonthlySale() async {
     final res =
-        await _http.getData("http://192.168.0.104:9988/invoice/current-sale");
+        await _http.getData("http://192.168.1.85:9988/invoice/current-sale");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
@@ -202,13 +205,26 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getDailySale() async {
     final res =
-        await _http.getData("http://192.168.0.104:9988/invoice/count-daily-sale");
+        await _http.getData("http://192.168.1.85:9988/invoice/count-daily-sale");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
       print("Daily Sale console printed");
       setState(() {
         dailySale = map['Data'];
+      });
+    }
+  }
+
+  Future<void> getInvoiceData() async {
+    final res =
+        await _http.getData("http://192.168.1.85:9988/invoice/getAll");
+    if (res.statusCode == 200) {
+      Map<String, dynamic> map = jsonDecode(res.body);
+      print(map['Data']);
+      print("Invoice list console printed");
+      setState(() {
+        invoices = map['Data'];
       });
     }
   }

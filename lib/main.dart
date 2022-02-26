@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invoice_flutter/page/bottom_navigation_page.dart';
 import 'package:invoice_flutter/page/dashboard_page.dart';
 import 'package:invoice_flutter/page/home_page.dart';
 import 'package:invoice_flutter/page/login_page.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.dashboard: (context) => Dashboard(),
         MyRoutes.loginRoute: (context) => LoginPage(),
         MyRoutes.signupRoute: (context) => SignUpPage(),
-      },
+      }
     );
   }
 }
