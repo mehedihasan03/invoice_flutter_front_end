@@ -163,7 +163,7 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getTotalInvoice() async {
     final res =
-        await _http.getData("http://192.168.0.106:9988/invoice/count-invoice");
+        await _http.getData("http://192.168.1.85:9988/invoice/count-invoice");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
@@ -176,7 +176,7 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getTodayInvoices() async {
     final res =
-        await _http.getData("http://192.168.0.106:9988/invoice/count-today-invoices");
+        await _http.getData("http://192.168.1.85:9988/invoice/count-today-invoices");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
@@ -189,7 +189,7 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getMonthlySale() async {
     final res =
-        await _http.getData("http://192.168.0.106:9988/invoice/current-sale");
+        await _http.getData("http://192.168.1.85:9988/invoice/current-sale");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
@@ -202,7 +202,7 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getDailySale() async {
     final res =
-        await _http.getData("http://192.168.0.106:9988/invoice/count-daily-sale");
+        await _http.getData("http://192.168.1.85:9988/invoice/count-daily-sale");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       print(map['Data']);
@@ -215,14 +215,14 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> getInvoiceData() async {
     final res =
-        await _http.getData("http://192.168.0.106:9988/invoice/getAll");
+        await _http.getData("http://192.168.1.85:9988/invoice/getAll");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
-      print(map['Data']);
-
+var data = map['Data'] as List<dynamic>;
       print("Invoice list console printed");
       setState(() {
-        invoices = Invoice.fromMap(map['Data']) as List<Invoice>;
+        invoices = data.map((e) => Invoice.fromMap(e)).toList();
+
       });
     }
   }
