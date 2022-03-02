@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invoice_flutter/page/profile_page.dart';
+import 'package:invoice_flutter/page/screen/profile_page.dart';
 
 import 'home_page.dart';
 

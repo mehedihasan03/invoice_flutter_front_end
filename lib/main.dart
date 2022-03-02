@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:invoice_flutter/page/dashboard_page.dart';
-import 'package:invoice_flutter/page/home_page.dart';
-import 'package:invoice_flutter/page/login_page.dart';
-import 'package:invoice_flutter/page/profile_page.dart';
-import 'package:invoice_flutter/page/sign_up_page.dart';
+import 'package:invoice_flutter/page/screen/dashboard_page.dart';
+import 'package:invoice_flutter/page/screen/home_page.dart';
+import 'package:invoice_flutter/page/screen/login_page.dart';
+import 'package:invoice_flutter/page/screen/profile_page.dart';
+import 'package:invoice_flutter/page/screen/sign_up_page.dart';
 import 'package:invoice_flutter/utils/routes.dart';
 
 void main() => runApp(const MyApp());

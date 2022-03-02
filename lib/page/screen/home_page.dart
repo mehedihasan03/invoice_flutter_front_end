@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:invoice_flutter/page/create_invoice_page.dart';
-import 'package:invoice_flutter/page/invoice_list_page.dart';
-import 'package:invoice_flutter/page/profile_page.dart';
+import 'package:invoice_flutter/page/screen/invoice_list_page.dart';
+import 'package:invoice_flutter/page/screen/profile_page.dart';
 import 'package:invoice_flutter/utils/routes.dart';
 
 import 'bottom_navigation_page.dart';
+import 'create_invoice_page.dart';
 import 'dashboard_page.dart';
 import 'drawer_header_page.dart';
 import 'login_page.dart';
