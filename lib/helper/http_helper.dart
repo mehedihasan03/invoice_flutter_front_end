@@ -49,7 +49,9 @@ class HttpHelper {
           Map<dynamic, dynamic> responseJson = json.decode(response.body);
           var data = responseJson['message'];
           throw BadRequestException(data.toString());
-        } catch (e) {}
+        } catch (e) {
+          log(e.toString());
+        }
         break;
       case 412:
         Map<dynamic, dynamic> responseJson = json.decode(response.body);

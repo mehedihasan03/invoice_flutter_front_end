@@ -4,13 +4,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:invoice_flutter/helper/my_host_api.dart';
-import 'package:invoice_flutter/page/dashboard_page.dart';
 import 'package:invoice_flutter/page/model/login.dart';
-import 'package:invoice_flutter/page/sign_up_page.dart';
 import 'package:invoice_flutter/utils/routes.dart';
 
 import '../helper/http_helper.dart';
-import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -78,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text(
                     'User Login',
                     style: TextStyle(
-                        color: Colors.blue,
+                        color: Color.fromRGBO(49, 87, 110, 1.0),
                         fontWeight: FontWeight.w900,
                         fontSize: 40),
                   )

@@ -27,46 +27,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final _passwordController = TextEditingController();
   final _repasswordController = TextEditingController();
 
-  Future<void> saveUser() async {
-    String name = _nameController.value.text;
-    String username = _usernameController.value.text;
-    String email = _emailController.value.text;
-    String pass = _passwordController.value.text;
-    String repass = _repasswordController.value.text;
-
-    if (pass == repass) {
-      String password = pass;
-      var model = User(
-          name: name, username: username, email: email, password: password);
-
-      String _body = jsonEncode(model.toMap());
-
-      try {
-        final response =
-            await _http.postData(host+'/user/save', _body);
-        sendEmail();
-        Fluttertoast.showToast(
-            msg: "User Created Successfully",
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 3,
-            fontSize: 20,
-            backgroundColor: Colors.green
-        );
-      } catch (e) {
-        log(e.toString());
-        Fluttertoast.showToast(
-            msg: "$e",
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -203,7 +163,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
               ),
-    SizedBox(height: 20.0,),
+              SizedBox(
+                height: 20.0,
+              ),
               Center(
                 child: ElevatedButton(
                   child: const Text(
@@ -239,23 +201,19 @@ class _SignUpPageState extends State<SignUpPage> {
   Future<void> sendEmail() async {
     String email = _emailController.value.text;
 
-    Map _data = {
-      'receiver': jsonEncode(email)
-    };
+    Map _data = {'receiver': jsonEncode(email)};
     //encode Map to JSON
     String _body = json.encode(_data);
 
     try {
-      final response =
-          await _http.postData('http://192.168.1.85:9988/sendUserEmail', _body);
+      final response = await _http.postData(host + '/sendUserEmail', _body);
       Fluttertoast.showToast(
           msg: "Email send successfully",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 3,
           fontSize: 20,
-          backgroundColor: Colors.green
-      );
+          backgroundColor: Colors.green);
     } catch (e) {
       log(e.toString());
       Fluttertoast.showToast(
@@ -267,6 +225,43 @@ class _SignUpPageState extends State<SignUpPage> {
           textColor: Colors.white,
           fontSize: 16.0);
     }
+  }
 
+  Future<void> saveUser() async {
+    String name = _nameController.value.text;
+    String username = _usernameController.value.text;
+    String email = _emailController.value.text;
+    String pass = _passwordController.value.text;
+    String repass = _repasswordController.value.text;
+
+    if (pass == repass) {
+      String password = pass;
+      var model = User(
+          name: name, username: username, email: email, password: password);
+
+      String _body = jsonEncode(model.toMap());
+
+      try {
+        final response = await _http.postData(host + '/user/save', _body);
+        sendEmail();
+        Fluttertoast.showToast(
+            msg: "User Created Successfully",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 3,
+            fontSize: 20,
+            backgroundColor: Colors.green);
+      } catch (e) {
+        log(e.toString());
+        Fluttertoast.showToast(
+            msg: "$e",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
   }
 }

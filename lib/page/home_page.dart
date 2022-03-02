@@ -20,6 +20,8 @@ class _HomePageState extends State<HomePage> {
   List<Widget> pages = [
     Dashboard(),
     CreateInviocePage(),
+    InvoiceListPage(),
+    ProfileUI2()
   ];
 
   @override
@@ -27,11 +29,11 @@ class _HomePageState extends State<HomePage> {
     var container;
     if (currentPage == DrawerSections.dashboard) {
       container = Dashboard();
-    } else if (currentPage == DrawerSections.create_invoice) {
+    } else if (currentPage == DrawerSections.createInvoice) {
       container = CreateInviocePage();
-    } else if (currentPage == DrawerSections.invoice_list) {
+    } else if (currentPage == DrawerSections.invoiceList) {
       container = InvoiceListPage();
-    } else if (currentPage == DrawerSections.invoice_list) {
+    } else if (currentPage == DrawerSections.profile) {
       container = ProfileUI2();
     }
     return Scaffold(
@@ -68,13 +70,11 @@ class _HomePageState extends State<HomePage> {
       body: container,
       drawer: Drawer(
         child: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                MyHeaderDrawer(),
-                MyDrawerList(),
-              ],
-            ),
+          child: Column(
+            children: <Widget>[
+              MyHeaderDrawer(),
+              MyDrawerList(),
+            ],
           ),
         ),
       ),
@@ -93,9 +93,9 @@ class _HomePageState extends State<HomePage> {
           menuItem(1, "Dashboard", Icons.dashboard_outlined,
               currentPage == DrawerSections.dashboard ? true : false),
           menuItem(2, "Create Invoice", Icons.local_hospital_rounded,
-              currentPage == DrawerSections.create_invoice ? true : false),
+              currentPage == DrawerSections.createInvoice ? true : false),
           menuItem(3, "Invoices", Icons.event,
-              currentPage == DrawerSections.invoice_list ? true : false),
+              currentPage == DrawerSections.invoiceList ? true : false),
           Divider(),
           menuItem(4, "Profile", Icons.person_pin_outlined,
               currentPage == DrawerSections.profile ? true : false),
@@ -114,9 +114,9 @@ class _HomePageState extends State<HomePage> {
             if (id == 1) {
               currentPage = DrawerSections.dashboard;
             } else if (id == 2) {
-              currentPage = DrawerSections.create_invoice;
+              currentPage = DrawerSections.createInvoice;
             } else if (id == 3) {
-              currentPage = DrawerSections.invoice_list;
+              currentPage = DrawerSections.invoiceList;
             } else if (id == 4) {
               currentPage = DrawerSections.profile;
             }
@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-enum DrawerSections { dashboard, create_invoice, invoice_list, profile }
+enum DrawerSections { dashboard, createInvoice, invoiceList, profile }
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -209,10 +209,10 @@ class SearchPage extends StatelessWidget {
             ListTile(
               title: Row(
                 children: <Widget>[
-                  Icon(Icons.account_balance_wallet_outlined),
+                  Icon(Icons.person),
                   Padding(
                     padding: EdgeInsets.only(left: 15.0),
-                    child: Text("Create Invoice"),
+                    child: Text("My Profile"),
                   )
                 ],
               ),

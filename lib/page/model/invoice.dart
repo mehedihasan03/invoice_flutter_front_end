@@ -4,7 +4,7 @@ class Invoice{
   late int id;
   late String customerName;
   late String accountNumber;
-  late int totalPrice;
+  late double totalPrice;
   late String paymentDate;
 
 //<editor-fold desc="Data Methods">
@@ -51,7 +51,7 @@ class Invoice{
     int? id,
     String? customerName,
     String? accountNumber,
-    int? totalPrice,
+    double? totalPrice,
     String? paymentDate,
   }) {
     return Invoice(
@@ -78,7 +78,7 @@ class Invoice{
       id: map['id'] as int,
       customerName: map['customerName'] as String,
       accountNumber: map['accountNumber'] as String,
-      totalPrice: map['totalPrice'] as int,
+      totalPrice: map['totalPrice'] as double,
       paymentDate: map['paymentDate'] as String,
     );
   }

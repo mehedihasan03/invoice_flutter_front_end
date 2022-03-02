@@ -91,7 +91,7 @@ class _DashboardState extends State<Dashboard> {
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold))),
                     DataColumn(
-                        label: Text('Name',
+                        label: Text('Account Name',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold))),

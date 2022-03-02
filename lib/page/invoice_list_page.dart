@@ -11,7 +11,9 @@ class _InvoiceListPageState extends State<InvoiceListPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-
+  child: Center(
+      child: Text("Invoice List")
+  ),
     );
   }
 }

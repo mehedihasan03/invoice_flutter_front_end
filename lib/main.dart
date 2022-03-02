@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:invoice_flutter/page/bottom_navigation_page.dart';
 import 'package:invoice_flutter/page/dashboard_page.dart';
 import 'package:invoice_flutter/page/home_page.dart';
 import 'package:invoice_flutter/page/login_page.dart';
+import 'package:invoice_flutter/page/profile_page.dart';
 import 'package:invoice_flutter/page/sign_up_page.dart';
 import 'package:invoice_flutter/utils/routes.dart';
 
@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: MyRoutes.loginRoute,
       routes: {
         "/": (context) => LoginPage(),
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.dashboard: (context) => Dashboard(),
         MyRoutes.loginRoute: (context) => LoginPage(),
         MyRoutes.signupRoute: (context) => SignUpPage(),
+        MyRoutes.signupRoute: (context) => ProfileUI2(),
       }
     );
   }
