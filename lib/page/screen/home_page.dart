@@ -19,9 +19,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   List<Widget> pages = [
     Dashboard(),
-    CreateInviocePage(),
-    InvoiceListPage(),
-    ProfileUI2()
+    CreateInviocePage()
   ];
 
   @override

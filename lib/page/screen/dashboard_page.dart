@@ -61,7 +61,7 @@ class _DashboardState extends State<Dashboard> {
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
             )),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
             Center(
               child: Theme(
@@ -75,27 +75,27 @@ class _DashboardState extends State<Dashboard> {
                       DataColumn(
                           label: Text('ID',
                               style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold))),
                       DataColumn(
                           label: Text('Name',
                               style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold))),
                       DataColumn(
                           label: Text('Date',
                               style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold))),
                       DataColumn(
                           label: Text('Account Name',
                               style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold))),
                       DataColumn(
                           label: Text('Amount',
                               style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold))),
                     ],
                     rows: [

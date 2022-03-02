@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.dashboard: (context) => Dashboard(),
         MyRoutes.loginRoute: (context) => LoginPage(),
         MyRoutes.signupRoute: (context) => SignUpPage(),
-        MyRoutes.signupRoute: (context) => ProfileUI2(),
+        MyRoutes.profileRoute: (context) => ProfileUI2(),
       }
     );
   }
