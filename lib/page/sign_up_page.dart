@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:invoice_flutter/helper/http_helper.dart';
+import 'package:invoice_flutter/helper/my_host_api.dart';
 import 'package:invoice_flutter/page/model/user.dart';
 import 'package:invoice_flutter/utils/routes.dart';
 
@@ -42,7 +43,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
       try {
         final response =
-            await _http.postData('http://192.168.0.104:9988/user/save', _body);
+            await _http.postData(host+'/user/save', _body);
         sendEmail();
         Fluttertoast.showToast(
             msg: "User Created Successfully",

@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:invoice_flutter/helper/my_host_api.dart';
 import 'package:invoice_flutter/page/dashboard_page.dart';
 import 'package:invoice_flutter/page/model/login.dart';
 import 'package:invoice_flutter/page/sign_up_page.dart';
@@ -35,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final response =
-          await _http.postData('http://192.168.1.85:9988/login', _body);
+          await _http.postData(host+'/login', _body);
       print(response.toString());
 
         // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const Dashboard()));

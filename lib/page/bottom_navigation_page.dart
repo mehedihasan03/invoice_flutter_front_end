@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invoice_flutter/page/profile_page.dart';
 
 import 'home_page.dart';
 
@@ -25,10 +26,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     List<Widget> _widgetOptions = <Widget>[
     HomePage(),
 
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+    ProfileUI2(),
     Text(
       'Index 2: School',
       style: optionStyle,
@@ -52,26 +50,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Colors.red,
+            backgroundColor: Color.fromRGBO(49, 87, 110, 1.0),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.dashboard),
             label: 'Dashboard',
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.lightBlue.shade900,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_pin_outlined),
             label: 'Invoice',
-            backgroundColor: Colors.purple,
+            backgroundColor: Colors.lightBlue.shade800,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Setting',
-            backgroundColor: Colors.pink,
+            backgroundColor: Colors.lightBlue.shade700,
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.black,
         onTap: _onItemTapped,
     );
   }

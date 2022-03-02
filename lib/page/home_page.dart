@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:invoice_flutter/page/create_invoice_page.dart';
 import 'package:invoice_flutter/page/invoice_list_page.dart';
+import 'package:invoice_flutter/page/profile_page.dart';
 import 'package:invoice_flutter/utils/routes.dart';
 
 import 'bottom_navigation_page.dart';
@@ -19,7 +20,6 @@ class _HomePageState extends State<HomePage> {
   List<Widget> pages = [
     Dashboard(),
     CreateInviocePage(),
-
   ];
 
   @override
@@ -31,45 +31,46 @@ class _HomePageState extends State<HomePage> {
       container = CreateInviocePage();
     } else if (currentPage == DrawerSections.invoice_list) {
       container = InvoiceListPage();
+    } else if (currentPage == DrawerSections.invoice_list) {
+      container = ProfileUI2();
     }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(49, 87, 110, 1.0),
         title: Text("Invoice Management"),
-          actions: [
-            Padding(
+        actions: [
+          Padding(
               padding: EdgeInsets.symmetric(horizontal: 5),
               child: IconButton(
                   onPressed: () => Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => SearchPage())),
-                  icon: Icon(Icons.search))
+                  icon: Icon(Icons.search))),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            child: Icon(Icons.print_sharp),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            child: Icon(Icons.fullscreen),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => LoginPage()));
+              },
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              child: Icon(Icons.print_sharp),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              child: Icon(Icons.fullscreen),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: IconButton(
-                icon: Icon(Icons.logout),
-
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginPage()));
-                },
-              ),
-            ),
-          ],
+          ),
+        ],
       ),
       body: container,
       drawer: Drawer(
         child: SingleChildScrollView(
           child: Container(
             child: Column(
-              children: [
+              children: <Widget>[
                 MyHeaderDrawer(),
                 MyDrawerList(),
               ],
@@ -96,6 +97,8 @@ class _HomePageState extends State<HomePage> {
           menuItem(3, "Invoices", Icons.event,
               currentPage == DrawerSections.invoice_list ? true : false),
           Divider(),
+          menuItem(4, "Profile", Icons.person_pin_outlined,
+              currentPage == DrawerSections.profile ? true : false),
         ],
       ),
     );
@@ -114,6 +117,8 @@ class _HomePageState extends State<HomePage> {
               currentPage = DrawerSections.create_invoice;
             } else if (id == 3) {
               currentPage = DrawerSections.invoice_list;
+            } else if (id == 4) {
+              currentPage = DrawerSections.profile;
             }
           });
         },
@@ -146,12 +151,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-enum DrawerSections {
-  dashboard,
-  create_invoice,
-  invoice_list
-
-}
+enum DrawerSections { dashboard, create_invoice, invoice_list, profile }
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -159,6 +159,71 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Color.fromRGBO(49, 87, 110, 1.0),
+              ),
+              child: Text(
+                'Dashboard',
+                style: TextStyle(
+                    fontSize: 40.0,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white),
+              ),
+            ),
+            ListTile(
+              title: Row(
+                children: <Widget>[
+                  Icon(Icons.account_balance_wallet_outlined),
+                  Padding(
+                    padding: EdgeInsets.only(left: 15.0),
+                    child: Text("Create Invoice"),
+                  )
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CreateInviocePage()));
+              },
+            ),
+            ListTile(
+              title: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Icon(Icons.list_alt_outlined),
+                  Padding(
+                    padding: EdgeInsets.only(left: 15.0),
+                    child: Text("Invoices"),
+                  )
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => InvoiceListPage()));
+              },
+            ),
+            ListTile(
+              title: Row(
+                children: <Widget>[
+                  Icon(Icons.account_balance_wallet_outlined),
+                  Padding(
+                    padding: EdgeInsets.only(left: 15.0),
+                    child: Text("Create Invoice"),
+                  )
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ProfileUI2()));
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
           backgroundColor: Color.fromRGBO(49, 87, 110, 1.0),
           // The search area here
@@ -176,7 +241,6 @@ class SearchPage extends StatelessWidget {
                       onPressed: () {
                         /* Clear the search field */
                         Navigator.pushNamed(context, MyRoutes.homeRoute);
-
                       },
                     ),
                     hintText: 'Search...',
