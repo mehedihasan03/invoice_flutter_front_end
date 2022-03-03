@@ -8,7 +8,6 @@ import 'package:invoice_flutter/helper/my_host_api.dart';
 import 'package:invoice_flutter/page/model/user.dart';
 import 'package:invoice_flutter/utils/routes.dart';
 
-import 'login_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -35,165 +34,167 @@ class _SignUpPageState extends State<SignUpPage> {
           elevation: .1,
           backgroundColor: const Color.fromRGBO(49, 87, 110, 1.0),
         ),
-        body: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Center(
-                child: Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: Text(
-                      'Registration Form',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 40),
-                    )),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20.0, top: 25.0, right: 20.0, bottom: 0.0),
-                  child: TextFormField(
-                    controller: _nameController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      icon: Icon(Icons.person),
-                      hintText: 'Enter your full name',
-                      labelText: 'Name',
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Center(
+                  child: Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Text(
+                        'Registration Form',
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 40),
+                      )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, top: 25.0, right: 20.0, bottom: 0.0),
+                    child: TextFormField(
+                      controller: _nameController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        icon: Icon(Icons.person),
+                        hintText: 'Enter your full name',
+                        labelText: 'Name',
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your full name';
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your full name';
-                      }
-                      return null;
-                    },
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20.0, top: 4.0, right: 20.0, bottom: 0.0),
-                  child: TextFormField(
-                    controller: _usernameController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      icon: Icon(Icons.verified_user),
-                      hintText: 'Enter a Username',
-                      labelText: 'Username',
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, top: 4.0, right: 20.0, bottom: 0.0),
+                    child: TextFormField(
+                      controller: _usernameController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        icon: Icon(Icons.verified_user),
+                        hintText: 'Enter a Username',
+                        labelText: 'Username',
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter unique Username';
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter unique Username';
-                      }
-                      return null;
-                    },
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20.0, top: 4.0, right: 20.0, bottom: 4.0),
-                  child: TextFormField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      icon: Icon(Icons.email),
-                      hintText: 'Enter your email address',
-                      labelText: 'Email',
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, top: 4.0, right: 20.0, bottom: 4.0),
+                    child: TextFormField(
+                      controller: _emailController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        icon: Icon(Icons.email),
+                        hintText: 'Enter your email address',
+                        labelText: 'Email',
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter a valid email';
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter a valid email';
-                      }
-                      return null;
-                    },
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20.0, top: 4.0, right: 20.0, bottom: 4.0),
-                  child: TextFormField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      icon: Icon(Icons.password),
-                      hintText: 'Enter your Password',
-                      labelText: 'Password',
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, top: 4.0, right: 20.0, bottom: 4.0),
+                    child: TextFormField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        icon: Icon(Icons.password),
+                        hintText: 'Enter your Password',
+                        labelText: 'Password',
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter correct password';
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter correct password';
-                      }
-                      return null;
-                    },
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20.0, top: 4.0, right: 20.0, bottom: 4.0),
-                  child: TextFormField(
-                    controller: _repasswordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      icon: Icon(Icons.password),
-                      hintText: 'Re-Type Your Password',
-                      labelText: 'Re-Type Password',
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, top: 4.0, right: 20.0, bottom: 4.0),
+                    child: TextFormField(
+                      controller: _repasswordController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        icon: Icon(Icons.password),
+                        hintText: 'Re-Type Your Password',
+                        labelText: 'Re-Type Password',
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Re-Type Your Password';
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Re-Type Your Password';
-                      }
-                      return null;
-                    },
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Center(
-                child: ElevatedButton(
-                  child: const Text(
-                    'Submit',
-                    style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w900),
-                  ),
-                  onPressed: () {
-                    saveUser();
-                  },
+                SizedBox(
+                  height: 20.0,
                 ),
-              ),
-              Row(
-                children: <Widget>[
-                  const Text('Already have an account?'),
-                  TextButton(
+                Center(
+                  child: ElevatedButton(
                     child: const Text(
-                      'Login',
-                      style: TextStyle(fontSize: 15),
+                      'Submit',
+                      style:
+                          TextStyle(fontSize: 20.0, fontWeight: FontWeight.w900),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, MyRoutes.loginRoute);
+                      saveUser();
                     },
-                  )
-                ],
-                mainAxisAlignment: MainAxisAlignment.center,
-              ),
-            ],
+                  ),
+                ),
+                Row(
+                  children: <Widget>[
+                    const Text('Already have an account?'),
+                    TextButton(
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, MyRoutes.loginRoute);
+                      },
+                    )
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ),
+              ],
+            ),
           ),
         ));
   }
