@@ -56,13 +56,16 @@ class _ProfileUI2State extends State<ProfileUI2> {
           SizedBox(
             height: 10,
           ),
-          Text(
-            "App Developer at Computer Solutions Corporation",
-            style: TextStyle(
-                fontSize: 15.0,
-                color: Colors.black45,
-                letterSpacing: 2.0,
-                fontWeight: FontWeight.w300),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "App Developer at Computer Solutions Corporation",
+              style: TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.black45,
+                  letterSpacing: 2.0,
+                  fontWeight: FontWeight.w300),
+            ),
           ),
           SizedBox(
             height: 10,
