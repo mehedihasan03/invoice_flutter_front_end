@@ -1,4 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+
+import '../../helper/http_helper.dart';
+import '../../helper/my_host_api.dart';
+import '../model/invoice.dart';
 
 class InvoiceListPage extends StatefulWidget {
   const InvoiceListPage({Key? key}) : super(key: key);
@@ -8,12 +14,129 @@ class InvoiceListPage extends StatefulWidget {
 }
 
 class _InvoiceListPageState extends State<InvoiceListPage> {
+
+  final _nameController = TextEditingController();
+
+  final _http = HttpHelper();
+  List<Invoice> invoices = [];
+
+
+  @override
+  void initState() {
+    getInvoiceData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-  child: Center(
-      child: Text("Invoice List")
-  ),
+    return Column(
+      children: [
+        Expanded(
+          child: ListView(children: <Widget>[
+            Center(
+                child: Text(
+                  'Total Invoices',
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+                )),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+              child: TextField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    suffix: RaisedButton(
+                      child: Text(
+                          "Search",
+                        style: TextStyle(fontSize: 12.0),
+                      ),
+                      onPressed: () {
+                        getSearchData();
+                      },
+                    ),
+
+                    hintText: 'Write here',
+                    border: InputBorder.none),
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Center(
+              child: Theme(
+                data: Theme.of(context)
+                    .copyWith(dividerColor: Color.fromRGBO(49, 87, 110, 1.0)),
+                child: SingleChildScrollView(
+                  child: DataTable(
+                    headingRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color.fromRGBO(49, 87, 110, 1.0)),
+                    columns: [
+                      DataColumn(
+                          label: Text('ID',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold))),
+                      DataColumn(
+                          label: Text('Name',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold))),
+                      DataColumn(
+                          label: Text('Date',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold))),
+                      DataColumn(
+                          label: Text('Account Name',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold))),
+                      DataColumn(
+                          label: Text('Amount',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold))),
+                    ],
+                    rows: [
+                      for (int i = 0; i < invoices.length; i++)
+                        DataRow(cells: [
+                          DataCell(Text(invoices[i].id.toString())),
+                          DataCell(Text(invoices[i].customerName)),
+                          DataCell(Text(invoices[i].paymentDate)),
+                          DataCell(Text(invoices[i].accountNumber)),
+                          DataCell(Text(invoices[i].totalPrice.toString())),
+                        ])
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ]),
+        ),
+      ],
     );
+  }
+
+  Future<void> getInvoiceData() async {
+    final res = await _http.getData(host + "/invoice/getAll");
+    if (res.statusCode == 200) {
+      Map<String, dynamic> map = jsonDecode(res.body);
+      var data = map['Data'] as List<dynamic>;
+      print("Invoice list console printed");
+      setState(() {
+        invoices = data.map((e) => Invoice.fromMap(e)).toList();
+      });
+    }
+  }
+
+  Future<void> getSearchData() async {
+    String searchText = _nameController.value.text;
+    final res = await _http.getData(host + "/invoice/search?searchText="+searchText);
+    if (res.statusCode == 200) {
+      Map<String, dynamic> map = jsonDecode(res.body);
+      var data = map['Data'] as List<dynamic>;
+      print("Invoice search console printed");
+      setState(() {
+        invoices = data.map((e) => Invoice.fromMap(e)).toList();
+      });
+    }
   }
 }
