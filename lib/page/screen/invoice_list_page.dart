@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../helper/http_helper.dart';
 import '../../helper/my_host_api.dart';
+import '../../utils/routes.dart';
 import '../model/invoice.dart';
 
 class InvoiceListPage extends StatefulWidget {
@@ -28,6 +29,9 @@ class _InvoiceListPageState extends State<InvoiceListPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return Column(
       children: [
         Expanded(
@@ -42,18 +46,28 @@ class _InvoiceListPageState extends State<InvoiceListPage> {
               child: TextField(
                 controller: _nameController,
                 decoration: InputDecoration(
+                  fillColor: Color.fromRGBO(49, 87, 110, 1.0),
                     prefixIcon: Icon(Icons.search),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.clear),
+                      onPressed: () {
+                        _nameController.clear();
+                        getInvoiceData();
+                      },
+                    ),
                     suffix: RaisedButton(
+                      color: Color.fromRGBO(49, 87, 110, 1.0),
                       child: Text(
                           "Search",
-                        style: TextStyle(fontSize: 12.0),
+                        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400, color: Colors.white),
                       ),
                       onPressed: () {
                         getSearchData();
                       },
                     ),
 
-                    hintText: 'Write here',
+
+                    hintText: 'Search here',
                     border: InputBorder.none),
               ),
             ),
@@ -85,7 +99,7 @@ class _InvoiceListPageState extends State<InvoiceListPage> {
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold))),
                       DataColumn(
-                          label: Text('Account Name',
+                          label: Text('Payment',
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold))),
