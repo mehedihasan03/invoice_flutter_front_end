@@ -14,7 +14,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  final _http = new HttpHelper();
+  final _http = HttpHelper();
   var totalInvoice;
   var todayInvoices;
   var monthlySale;
@@ -68,45 +68,51 @@ class _DashboardState extends State<Dashboard> {
                 data: Theme.of(context)
                     .copyWith(dividerColor: Color.fromRGBO(49, 87, 110, 1.0)),
                 child: SingleChildScrollView(
-                  child: DataTable(
-                    headingRowColor: MaterialStateColor.resolveWith(
-                        (states) => Color.fromRGBO(49, 87, 110, 1.0)),
-                    columns: [
-                      DataColumn(
-                          label: Text('ID',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold))),
-                      DataColumn(
-                          label: Text('Name',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold))),
-                      DataColumn(
-                          label: Text('Date',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold))),
-                      DataColumn(
-                          label: Text('Account Name',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold))),
-                      DataColumn(
-                          label: Text('Amount',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold))),
-                    ],
-                    rows: [
-                      for (int i = 0; i < invoices.length; i++)
-                        DataRow(cells: [
-                          DataCell(Text(invoices[i].id.toString())),
-                          DataCell(Text(invoices[i].customerName)),
-                          DataCell(Text(invoices[i].paymentDate)),
-                          DataCell(Text(invoices[i].accountNumber)),
-                          DataCell(Text(invoices[i].totalPrice.toString())),
-                        ])
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      DataTable(
+                        headingRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color.fromRGBO(49, 87, 110, 1.0)),
+                        columns: [
+                          DataColumn(
+                              label: Text('ID',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold))),
+                          DataColumn(
+                              label: Text('Name',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold))),
+                          DataColumn(
+                              label: Text('Date',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold))),
+                          DataColumn(
+                              label: Text('Payment',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold))),
+                          DataColumn(
+                              label: Text('Amount',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold))),
+                        ],
+                        rows: [
+                          for (int i = 0; i < invoices.length; i++)
+                            DataRow(cells: [
+                              DataCell(Text(invoices[i].id.toString())),
+                              DataCell(Text(invoices[i].customerName)),
+                              DataCell(Text(invoices[i].paymentDate)),
+                              DataCell(Text(invoices[i].accountNumber)),
+                              DataCell(Text(invoices[i].totalPrice.toString())),
+                            ])
+                        ],
+                      ),
                     ],
                   ),
                 ),
