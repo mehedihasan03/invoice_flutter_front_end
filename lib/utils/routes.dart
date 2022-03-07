@@ -9,5 +9,8 @@ class MyRoutes{
   static String aboutRoute="/about";
   static String newInvoiceRoute="/newInvoice";
   static String invoiceListRoute="/invoice";
+  static String productsRoute="/products";
+  static String customersRoute="/customers";
+  static String categoriesRoute="/categories";
 
 }

@@ -42,11 +42,18 @@ class _InvoiceListPageState extends State<InvoiceListPage> {
               padding: const EdgeInsets.only(left: 8.0, right: 8.0),
               child: TextField(
                 controller: _nameController,
+                cursorColor: Color.fromRGBO(49, 87, 110, 1.0),
                 decoration: InputDecoration(
                     fillColor: Color.fromRGBO(49, 87, 110, 1.0),
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Color.fromRGBO(49, 87, 110, 1.0),
+                    ),
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.clear),
+                      icon: Icon(
+                        Icons.clear,
+                        color: Color.fromRGBO(49, 87, 110, 1.0),
+                      ),
                       onPressed: () {
                         _nameController.clear();
                         getInvoiceData();
@@ -87,33 +94,69 @@ class _InvoiceListPageState extends State<InvoiceListPage> {
                         columns: [
                           DataColumn(
                               label: Text('ID',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold))),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
                           DataColumn(
                               label: Text('Name',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold))),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
                           DataColumn(
                               label: Text('Date',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold))),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
                           DataColumn(
                               label: Text('Payment',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold))),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
                           DataColumn(
                               label: Text('Amount',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold))),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
+                          DataColumn(
+                              label: Text('Action',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
                         ],
                         rows: [
                           for (int i = 0; i < invoices.length; i++)
                             DataRow(cells: [
-                              DataCell(Text(invoices[i].id.toString())),
-                              DataCell(Text(invoices[i].customerName)),
-                              DataCell(Text(invoices[i].paymentDate)),
-                              DataCell(Text(invoices[i].accountNumber)),
-                              DataCell(Text(invoices[i].totalPrice.toString())),
+                              DataCell(Text(invoices[i].id.toString(), textAlign: TextAlign.center,)),
+                              DataCell(Text(invoices[i].customerName, textAlign: TextAlign.center,)),
+                              DataCell(Text(invoices[i].paymentDate, textAlign: TextAlign.center,)),
+                              DataCell(Text(invoices[i].accountNumber, textAlign: TextAlign.center,)),
+                              DataCell(Text(invoices[i].totalPrice.toString(), textAlign: TextAlign.center,)),
+                              DataCell(
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(Icons.edit_outlined),
+                                      onPressed: () {},
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.delete_forever),
+                                      onPressed: () {},
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ])
                         ],
                       ),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:invoice_flutter/page/screen/about_page.dart';
+import 'package:invoice_flutter/page/screen/category_list_page.dart';
 import 'package:invoice_flutter/page/screen/create_customer_page.dart';
+import 'package:invoice_flutter/page/screen/customer_list_page.dart';
 import 'package:invoice_flutter/page/screen/invoice_list_page.dart';
+import 'package:invoice_flutter/page/screen/product_list_page.dart';
 import 'package:invoice_flutter/page/screen/profile_page.dart';
 import 'package:invoice_flutter/page/screen/report_page.dart';
 import 'package:invoice_flutter/utils/routes.dart';
@@ -28,6 +31,9 @@ class _HomePageState extends State<HomePage> {
     ProfileUI2(),
     AboutPage(),
     ReportPage(),
+    CustomersPage(),
+    CategoriesPage(),
+    ProductsPage(),
   ];
 
   @override
@@ -47,6 +53,12 @@ class _HomePageState extends State<HomePage> {
       container = ReportPage();
     } else if (currentPage == DrawerSections.about) {
       container = AboutPage();
+    } else if (currentPage == DrawerSections.categories) {
+      container = CategoriesPage();
+    } else if (currentPage == DrawerSections.customers) {
+      container = CustomersPage();
+    } else if (currentPage == DrawerSections.products) {
+      container = ProductsPage();
     }
 
     return Scaffold(
@@ -105,26 +117,35 @@ class _HomePageState extends State<HomePage> {
         children: [
           menuItem(1, "Dashboard", Icons.dashboard_outlined,
               currentPage == DrawerSections.dashboard ? true : false),
-          menuItem(2, "Invoices", Icons.event,
-              currentPage == DrawerSections.invoiceList ? true : false),
           Divider(
             thickness: 2,
           ),
-          menuItem(3, "New Invoice", Icons.add_shopping_cart,
+          menuItem(2, "Invoices", Icons.event,
+              currentPage == DrawerSections.invoiceList ? true : false),
+          menuItem(3, "Products", Icons.poll_rounded,
+              currentPage == DrawerSections.products ? true : false),
+          menuItem(4, "Categories", Icons.category_outlined,
+              currentPage == DrawerSections.categories ? true : false),
+          menuItem(5, "Customers", Icons.person,
+              currentPage == DrawerSections.customers ? true : false),
+          Divider(
+            thickness: 2,
+          ),
+          menuItem(6, "New Invoice", Icons.add_shopping_cart,
               currentPage == DrawerSections.createInvoice ? true : false),
-          menuItem(4, "Add Customer", Icons.person_add_alt_1_rounded,
+          menuItem(7, "Add Customer", Icons.person_add_alt_1_rounded,
               currentPage == DrawerSections.createCustomer ? true : false),
           Divider(
             thickness: 2,
           ),
-          menuItem(5, "Profile", Icons.person_pin_outlined,
+          menuItem(8, "Profile", Icons.person_pin_outlined,
               currentPage == DrawerSections.profile ? true : false),
-          menuItem(6, "About", Icons.web,
+          menuItem(9, "About", Icons.web,
               currentPage == DrawerSections.about ? true : false),
           Divider(
             thickness: 2,
           ),
-          menuItem(7, "Report", Icons.report_problem_outlined,
+          menuItem(10, "Report", Icons.report_problem_outlined,
               currentPage == DrawerSections.report ? true : false),
         ],
       ),
@@ -143,14 +164,20 @@ class _HomePageState extends State<HomePage> {
             } else if (id == 2) {
               currentPage = DrawerSections.invoiceList;
             } else if (id == 3) {
-              currentPage = DrawerSections.createInvoice;
+              currentPage = DrawerSections.products;
             } else if (id == 4) {
-              currentPage = DrawerSections.createCustomer;
+              currentPage = DrawerSections.categories;
             } else if (id == 5) {
-              currentPage = DrawerSections.profile;
+              currentPage = DrawerSections.customers;
             } else if (id == 6) {
-              currentPage = DrawerSections.about;
+              currentPage = DrawerSections.createInvoice;
             } else if (id == 7) {
+              currentPage = DrawerSections.createCustomer;
+            } else if (id == 8) {
+              currentPage = DrawerSections.profile;
+            } else if (id == 9) {
+              currentPage = DrawerSections.about;
+            } else if (id == 10) {
               currentPage = DrawerSections.report;
             }
           });
@@ -187,6 +214,9 @@ class _HomePageState extends State<HomePage> {
 enum DrawerSections {
   dashboard,
   createInvoice,
+  customers,
+  products,
+  categories,
   invoiceList,
   profile,
   createCustomer,
@@ -324,9 +354,9 @@ class SearchPage extends StatelessWidget {
             child: Center(
               child: TextField(
                 decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: Icon(Icons.search, color: Color.fromRGBO(49, 87, 110, 1.0)),
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.clear),
+                      icon: Icon(Icons.clear, color: Color.fromRGBO(49, 87, 110, 1.0),),
                       onPressed: () {
                         /* Clear the search field */
                         Navigator.pushNamed(context, MyRoutes.homeRoute);

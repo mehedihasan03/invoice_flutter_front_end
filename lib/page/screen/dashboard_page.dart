@@ -80,27 +80,27 @@ class _DashboardState extends State<Dashboard> {
                               label: Text('ID',
                                   style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold))),
+                                      fontWeight: FontWeight.bold, color: Colors.white))),
                           DataColumn(
                               label: Text('Name',
                                   style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold))),
+                                      fontWeight: FontWeight.bold, color: Colors.white))),
                           DataColumn(
                               label: Text('Date',
                                   style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold))),
+                                      fontWeight: FontWeight.bold, color: Colors.white))),
                           DataColumn(
                               label: Text('Payment',
                                   style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold))),
+                                      fontWeight: FontWeight.bold, color: Colors.white))),
                           DataColumn(
                               label: Text('Amount',
                                   style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold))),
+                                      fontWeight: FontWeight.bold, color: Colors.white))),
                         ],
                         rows: [
                           for (int i = 0; i < invoices.length; i++)
