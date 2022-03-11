@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../helper/http_helper.dart';
@@ -16,7 +15,6 @@ class InvoiceListPage extends StatefulWidget {
 
 class _InvoiceListPageState extends State<InvoiceListPage> {
   final _nameController = TextEditingController();
-
   final _http = HttpHelper();
   List<Invoice> invoices = [];
 
@@ -27,8 +25,6 @@ class _InvoiceListPageState extends State<InvoiceListPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
     return Column(
       children: [
         Expanded(
@@ -136,13 +132,28 @@ class _InvoiceListPageState extends State<InvoiceListPage> {
                                       color: Colors.white))),
                         ],
                         rows: [
-                          for (int i = 0; i < invoices.length; i++)
+                          for (int i = invoices.length - 1; i >= 0; i--)
                             DataRow(cells: [
-                              DataCell(Text(invoices[i].id.toString(), textAlign: TextAlign.center,)),
-                              DataCell(Text(invoices[i].customerName, textAlign: TextAlign.center,)),
-                              DataCell(Text(invoices[i].paymentDate, textAlign: TextAlign.center,)),
-                              DataCell(Text(invoices[i].accountNumber, textAlign: TextAlign.center,)),
-                              DataCell(Text(invoices[i].totalPrice.toString(), textAlign: TextAlign.center,)),
+                              DataCell(Text(
+                                invoices[i].id.toString(),
+                                textAlign: TextAlign.center,
+                              )),
+                              DataCell(Text(
+                                invoices[i].customerName,
+                                textAlign: TextAlign.center,
+                              )),
+                              DataCell(Text(
+                                invoices[i].paymentDate,
+                                textAlign: TextAlign.center,
+                              )),
+                              DataCell(Text(
+                                invoices[i].accountNumber,
+                                textAlign: TextAlign.center,
+                              )),
+                              DataCell(Text(
+                                invoices[i].totalPrice.toString(),
+                                textAlign: TextAlign.center,
+                              )),
                               DataCell(
                                 Row(
                                   children: [

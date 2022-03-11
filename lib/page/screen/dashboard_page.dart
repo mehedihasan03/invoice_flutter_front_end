@@ -40,10 +40,8 @@ class _DashboardState extends State<Dashboard> {
             crossAxisCount: 2,
             padding: EdgeInsets.all(10.0),
             children: <Widget>[
-              makeDashboardItem(
-                  "Total Invoice ", Icons.receipt, totalInvoice),
-              makeDashboardItem(
-                  "Today Invoice", Icons.receipt, todayInvoices),
+              makeDashboardItem("Total Invoice ", Icons.receipt, totalInvoice),
+              makeDashboardItem("Today Invoice", Icons.receipt, todayInvoices),
               makeDashboardItem(
                   "Monthly Sale", Icons.attach_money, monthlySale),
               makeDashboardItem("Daily Sale", Icons.attach_money, dailySale)
@@ -80,27 +78,32 @@ class _DashboardState extends State<Dashboard> {
                               label: Text('ID',
                                   style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold, color: Colors.white))),
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
                           DataColumn(
                               label: Text('Name',
                                   style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold, color: Colors.white))),
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
                           DataColumn(
                               label: Text('Date',
                                   style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold, color: Colors.white))),
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
                           DataColumn(
                               label: Text('Payment',
                                   style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold, color: Colors.white))),
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
                           DataColumn(
                               label: Text('Amount',
                                   style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold, color: Colors.white))),
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white))),
                         ],
                         rows: [
                           for (int i = 0; i < invoices.length; i++)
@@ -173,7 +176,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future<void> getInvoiceData() async {
-    final res = await _http.getData(host + "/invoice/getAll");
+    final res = await _http.getData(host + "/invoice/getLast10");
     if (res.statusCode == 200) {
       Map<String, dynamic> map = jsonDecode(res.body);
       var data = map['Data'] as List<dynamic>;

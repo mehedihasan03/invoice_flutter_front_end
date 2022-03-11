@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 class Invoice{
   late int id;
   late String customerName;
