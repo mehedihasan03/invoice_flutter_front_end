@@ -31,8 +31,8 @@ class _CustomersPageState extends State<CustomersPage> {
           child: ListView(children: <Widget>[
             Center(
                 child: Text(
-              'Total Products',
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+              'All Customer',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
             )),
             Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 8.0),

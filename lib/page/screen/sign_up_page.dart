@@ -8,7 +8,6 @@ import 'package:invoice_flutter/helper/my_host_api.dart';
 import 'package:invoice_flutter/page/model/user.dart';
 import 'package:invoice_flutter/utils/routes.dart';
 
-
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
@@ -170,8 +169,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: ElevatedButton(
                     child: const Text(
                       'Submit',
-                      style:
-                          TextStyle(fontSize: 20.0, fontWeight: FontWeight.w900),
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.w900),
                     ),
                     onPressed: () {
                       saveUser();

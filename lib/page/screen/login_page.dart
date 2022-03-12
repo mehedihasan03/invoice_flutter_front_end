@@ -17,7 +17,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final _http = HttpHelper();
 
   final _usernameController = TextEditingController();
@@ -26,21 +25,15 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> loginUser() async {
     String username = _usernameController.value.text;
     String password = _passwordController.value.text;
-
     var model = Login(username: username, password: password);
-
     String _body = jsonEncode(model.toMap());
-
     try {
-      final response =
-          await _http.postData(host+'/login', _body);
+      final response = await _http.postData(host + '/login', _body);
       print(response.toString());
-
-        // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const Dashboard()));
+      // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const Dashboard()));
       // Navigator.of(context)
       //     .push(MaterialPageRoute(builder: (context) => HomePage()));
       Navigator.pushNamed(context, MyRoutes.homeRoute);
-
     } catch (e) {
       log(e.toString());
       Fluttertoast.showToast(
@@ -54,14 +47,11 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-            "Login"
-        ),
+        title: const Text("Login"),
         elevation: .1,
         backgroundColor: Color.fromRGBO(49, 87, 110, 1.0),
       ),
@@ -78,9 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: Color.fromRGBO(49, 87, 110, 1.0),
                         fontWeight: FontWeight.w900,
                         fontSize: 40),
-                  )
-              ),
-
+                  )),
               Container(
                 padding: const EdgeInsets.all(30),
                 child: TextField(
@@ -88,8 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Username',
-                      hintText: "Type your username"
-                  ),
+                      hintText: "Type your username"),
                 ),
               ),
               Container(
@@ -100,16 +87,19 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Password',
-                      hintText: "Type your password"
-                  ),
+                      hintText: "Type your password"),
                 ),
               ),
-              const SizedBox(height: 50.0,),
+              const SizedBox(
+                height: 50.0,
+              ),
               TextButton(
                 onPressed: () {
 //forgot password screen
                 },
-                child: const Text('Forgot Password?',),
+                child: const Text(
+                  'Forgot Password?',
+                ),
               ),
               Container(
                   height: 50,
@@ -118,17 +108,14 @@ class _LoginPageState extends State<LoginPage> {
                     child: const Text(
                       'Login',
                       style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w900
-                      ),
+                          fontSize: 20.0, fontWeight: FontWeight.w900),
                     ),
                     onPressed: () {
                       print(_usernameController.text);
                       print(_passwordController.text);
                       loginUser();
                     },
-                  )
-              ),
+                  )),
               Row(
                 children: <Widget>[
                   const Text('Does not have account?'),
@@ -145,14 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
               ),
             ],
-          )
-      ),
+          )),
     );
   }
-
-
-
 }
-
-
-

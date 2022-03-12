@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../helper/http_helper.dart';
@@ -32,8 +31,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
           child: ListView(children: <Widget>[
             Center(
                 child: Text(
-              'Total Products',
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+              'Total Categories',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
             )),
             Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 8.0),
