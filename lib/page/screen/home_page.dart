@@ -231,6 +231,7 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       drawer: Drawer(
         child: ListView(
           children: <Widget>[

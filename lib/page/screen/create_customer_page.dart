@@ -6,7 +6,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:invoice_flutter/helper/http_helper.dart';
 import 'package:invoice_flutter/helper/my_host_api.dart';
 import 'package:invoice_flutter/page/model/add_customer.dart';
-import 'package:invoice_flutter/page/screen/sign_up_page.dart';
 
 class CreateCustomer extends StatefulWidget {
   const CreateCustomer({Key? key}) : super(key: key);

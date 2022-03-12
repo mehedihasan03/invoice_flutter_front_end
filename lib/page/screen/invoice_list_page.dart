@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:invoice_flutter/utils/routes.dart';
 
 import '../../helper/http_helper.dart';
 import '../../helper/my_host_api.dart';
 import '../model/invoice.dart';
+import 'create_invoice_page.dart';
 
 class InvoiceListPage extends StatefulWidget {
   const InvoiceListPage({Key? key}) : super(key: key);
@@ -165,19 +167,41 @@ class _InvoiceListPageState extends State<InvoiceListPage> {
                                       icon: Icon(Icons.delete_forever),
                                       onPressed: () {},
                                     ),
+
+
                                   ],
                                 ),
                               ),
-                            ])
+                            ]),
                         ],
                       ),
                     ],
                   ),
                 ),
               ),
-            )
+            ),
           ]),
         ),
+        Padding(
+          padding: const EdgeInsets.only(right: 12,bottom: 12),
+          child: Container(
+            alignment: Alignment.bottomRight,
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CreateInviocePage()));
+              },
+              hoverColor: Colors.green,
+              foregroundColor: Colors.white,
+              highlightElevation: 50,
+              child: Icon(
+                  Icons.add,
+                size: 50.0,
+              ),
+              backgroundColor: Color.fromRGBO(49, 87, 110, 1.0).withOpacity(0.6),
+            ),
+          ),
+        )
       ],
     );
   }
@@ -204,7 +228,11 @@ class _InvoiceListPageState extends State<InvoiceListPage> {
       print("Invoice search console printed");
       setState(() {
         invoices = data.map((e) => Invoice.fromMap(e)).toList();
-      });
+      }
+
+
+
+      );
     }
   }
 }
