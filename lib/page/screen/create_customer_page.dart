@@ -85,6 +85,9 @@ class _CreateCustomerState extends State<CreateCustomer> {
                 height: 50,
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Color.fromRGBO(49, 87, 110, 1.0)
+                  ),
                   child: const Text(
                     'Add',
                     style:
@@ -122,6 +125,10 @@ class _CreateCustomerState extends State<CreateCustomer> {
           timeInSecForIosWeb: 3,
           fontSize: 20,
           backgroundColor: Colors.green);
+      _nameController.clear();
+      _emailController.clear();
+      _mobileController.clear();
+      _addressController.clear();
     } catch (e) {
       log(e.toString());
       Fluttertoast.showToast(

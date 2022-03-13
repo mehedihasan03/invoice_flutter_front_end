@@ -251,6 +251,11 @@ class _SignUpPageState extends State<SignUpPage> {
             timeInSecForIosWeb: 3,
             fontSize: 20,
             backgroundColor: Colors.green);
+        _nameController.clear();
+        _usernameController.clear();
+        _emailController.clear();
+        _passwordController.clear();
+        _repasswordController.clear();
       } catch (e) {
         log(e.toString());
         Fluttertoast.showToast(

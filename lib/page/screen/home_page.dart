@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:invoice_flutter/page/screen/about_page.dart';
 import 'package:invoice_flutter/page/screen/category_list_page.dart';
+import 'package:invoice_flutter/page/screen/create_category_page.dart';
 import 'package:invoice_flutter/page/screen/create_customer_page.dart';
 import 'package:invoice_flutter/page/screen/customer_list_page.dart';
 import 'package:invoice_flutter/page/screen/invoice_list_page.dart';
@@ -59,6 +60,8 @@ class _HomePageState extends State<HomePage> {
       container = CustomersPage();
     } else if (currentPage == DrawerSections.products) {
       container = ProductsPage();
+    } else if (currentPage == DrawerSections.createCategory) {
+      container = NewCategoryPage();
     }
 
     return Scaffold(
@@ -133,19 +136,21 @@ class _HomePageState extends State<HomePage> {
           ),
           menuItem(6, "New Invoice", Icons.add_shopping_cart,
               currentPage == DrawerSections.createInvoice ? true : false),
-          menuItem(7, "Add Customer", Icons.person_add_alt_1_rounded,
+          menuItem(7, "New Customer", Icons.person_add_alt_1_rounded,
               currentPage == DrawerSections.createCustomer ? true : false),
+          menuItem(8, "New Category", Icons.category_outlined,
+              currentPage == DrawerSections.createCategory ? true : false),
           Divider(
             thickness: 2,
           ),
-          menuItem(8, "Profile", Icons.person_pin_outlined,
+          menuItem(9, "Profile", Icons.person_pin_outlined,
               currentPage == DrawerSections.profile ? true : false),
-          menuItem(9, "About", Icons.web,
+          menuItem(10, "About", Icons.web,
               currentPage == DrawerSections.about ? true : false),
           Divider(
             thickness: 2,
           ),
-          menuItem(10, "Report", Icons.report_problem_outlined,
+          menuItem(11, "Report", Icons.report_problem_outlined,
               currentPage == DrawerSections.report ? true : false),
         ],
       ),
@@ -174,10 +179,12 @@ class _HomePageState extends State<HomePage> {
             } else if (id == 7) {
               currentPage = DrawerSections.createCustomer;
             } else if (id == 8) {
-              currentPage = DrawerSections.profile;
+              currentPage = DrawerSections.createCategory;
             } else if (id == 9) {
-              currentPage = DrawerSections.about;
+              currentPage = DrawerSections.profile;
             } else if (id == 10) {
+              currentPage = DrawerSections.about;
+            } else if (id == 11) {
               currentPage = DrawerSections.report;
             }
           });
@@ -220,6 +227,7 @@ enum DrawerSections {
   invoiceList,
   profile,
   createCustomer,
+  createCategory,
   report,
   about,
 }
