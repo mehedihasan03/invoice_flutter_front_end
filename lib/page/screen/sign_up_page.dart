@@ -29,7 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Resistration Page"),
+          title: const Text("User Resistration"),
           elevation: .1,
           backgroundColor: const Color.fromRGBO(49, 87, 110, 1.0),
         ),
@@ -45,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: Text(
                         'Registration Form',
                         style: TextStyle(
-                            color: Colors.blue,
+                            color: Color.fromRGBO(49, 87, 110, 1.0),
                             fontWeight: FontWeight.w900,
                             fontSize: 40),
                       )),
@@ -166,15 +166,22 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 20.0,
                 ),
                 Center(
-                  child: ElevatedButton(
-                    child: const Text(
-                      'Submit',
-                      style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.w900),
+                  child: Container(
+                    height: 50,
+                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Color.fromRGBO(49, 87, 110, 1.0)
+                      ),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.w900),
+                      ),
+                      onPressed: () {
+                        saveUser();
+                      },
                     ),
-                    onPressed: () {
-                      saveUser();
-                    },
                   ),
                 ),
                 Row(
