@@ -32,8 +32,10 @@ class _CreateInviocePageState extends State<CreateInviocePage> {
                     foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.black12),
                   ),
-                  onPressed: () { },
-                  child: Text('Add Customer'),
+                  onPressed: () {
+                    showAlertDialog(context);
+                  },
+                  child: const Text('Add Customer'),
                 )
               ],
             ),
@@ -43,4 +45,35 @@ class _CreateInviocePageState extends State<CreateInviocePage> {
         ],
       );
   }
+}
+
+showAlertDialog(BuildContext context) {
+
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: Text("Cancel"),
+    onPressed:  () {},
+  );
+  Widget continueButton = TextButton(
+    child: Text("Continue"),
+    onPressed:  () {},
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("AlertDialog"),
+    content: Text("Would you like to continue learning how to use Flutter alerts?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
