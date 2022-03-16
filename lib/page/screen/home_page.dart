@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
       container = Dashboard();
     } else if (currentPage == DrawerSections.createInvoice) {
       container = CreateInviocePage();
-    } else if (currentPage == DrawerSections.invoiceList) {
+    } else if (showFloatingButton()) {
       container = InvoiceListPage();
     } else if (currentPage == DrawerSections.profile) {
       container = ProfileUI2();
@@ -65,6 +65,14 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
+     floatingActionButton:  showFloatingButton() ? FloatingActionButton(
+        onPressed: (){
+         if(currentPage == DrawerSections.invoiceList) currentPage = DrawerSections.createInvoice;
+         if(currentPage == DrawerSections.customers) currentPage = DrawerSections.createCustomer;
+          setState(() { });
+        },
+       child: Icon(Icons.add),
+      ):null,
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(49, 87, 110, 1.0),
         title: Text("Invoice Management"),
@@ -110,6 +118,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  bool showFloatingButton() {
+   return currentPage == DrawerSections.invoiceList ||
+       currentPage == DrawerSections.products ||
+       currentPage == DrawerSections.categories ||
+       currentPage == DrawerSections.customers ;
+  }
+
   Widget MyDrawerList() {
     return Container(
       padding: EdgeInsets.only(
@@ -124,7 +139,7 @@ class _HomePageState extends State<HomePage> {
             thickness: 2,
           ),
           menuItem(2, "Invoices", Icons.event,
-              currentPage == DrawerSections.invoiceList ? true : false),
+              showFloatingButton() ? true : false),
           menuItem(3, "Products", Icons.poll_rounded,
               currentPage == DrawerSections.products ? true : false),
           menuItem(4, "Categories", Icons.category_outlined,
@@ -232,6 +247,8 @@ enum DrawerSections {
   about,
 }
 
+
+
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
 
@@ -239,8 +256,7 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      drawer: Drawer(
+       drawer: Drawer(
         child: ListView(
           children: <Widget>[
             DrawerHeader(

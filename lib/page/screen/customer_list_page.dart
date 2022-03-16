@@ -35,7 +35,7 @@ class _CustomersPageState extends State<CustomersPage> {
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
             )),
             Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+              padding: EdgeInsets.only(left: 8.0, right: 8.0),
               child: TextField(
                 controller: _nameController,
                 cursorColor: Color.fromRGBO(49, 87, 110, 1.0),
