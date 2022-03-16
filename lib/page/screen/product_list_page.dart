@@ -167,25 +167,6 @@ class _ProductsPageState extends State<ProductsPage> {
             )
           ]),
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 12,bottom: 12),
-          child: Container(
-            alignment: Alignment.bottomRight,
-            child: FloatingActionButton(
-              onPressed: () {
-
-              },
-              hoverColor: Colors.green,
-              foregroundColor: Colors.white,
-              highlightElevation: 50,
-              child: Icon(
-                Icons.add,
-                size: 50.0,
-              ),
-              backgroundColor: Color.fromRGBO(49, 87, 110, 1.0).withOpacity(0.6),
-            ),
-          ),
-        )
       ],
     );
   }

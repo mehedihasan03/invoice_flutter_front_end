@@ -26,7 +26,6 @@ class _CreateInviocePageState extends State<CreateInviocePage> {
         padding: EdgeInsets.zero,
         child: Column(
           children: [
-
             Expanded(
               child: GridView.count(
                 primary: false,
@@ -37,7 +36,67 @@ class _CreateInviocePageState extends State<CreateInviocePage> {
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.all(8),
-                    child: Text('Heed not the rabble'),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 5, top: 20, bottom: 15),
+                                child: Text(
+                                  'NCLC JEE-47',
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Text(
+                                  'Email: nclc.round47@gmail.com',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Text(
+                                  'Phone: (555) 539-1037',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Text(
+                                  'Momtaz Plaza, Dhanmondi-4',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Text(
+                                  'Dhanmondi, Dhaka-1205',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                     color: Colors.white70,
                   ),
                   Container(
@@ -53,33 +112,32 @@ class _CreateInviocePageState extends State<CreateInviocePage> {
                               TextButton(
                                 style: ButtonStyle(
                                   foregroundColor:
-                                      MaterialStateProperty.all<Color>(Colors.black),
-                                  backgroundColor: MaterialStateProperty.all<Color>(
-                                      Colors.black12),
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.black),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.black12),
                                 ),
                                 onPressed: () {
                                   showAlertDialog(context);
                                 },
                                 child: Text(
-                                    'Add Customer',
+                                  'Add Customer',
                                   style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20.0
-                                  ),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0),
                                 ),
                               ),
-
                               if (selected)
                                 Column(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(top: 15),
                                       child: Text(
-                                          invoiceCustomer.name,
+                                        invoiceCustomer.name,
                                         style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20
-                                        ),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20),
                                       ),
                                     ),
                                   ],
@@ -92,8 +150,7 @@ class _CreateInviocePageState extends State<CreateInviocePage> {
                                       child: Text(
                                         "Email: " + invoiceCustomer.email,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold
-                                        ),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ],
@@ -106,8 +163,7 @@ class _CreateInviocePageState extends State<CreateInviocePage> {
                                       child: Text(
                                         "Phone: " + invoiceCustomer.phone,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold
-                                        ),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ],
@@ -120,8 +176,7 @@ class _CreateInviocePageState extends State<CreateInviocePage> {
                                       child: Text(
                                         "Address: " + invoiceCustomer.address,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold
-                                        ),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ],

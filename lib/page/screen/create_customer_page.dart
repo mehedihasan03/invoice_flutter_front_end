@@ -24,9 +24,7 @@ class _CreateCustomerState extends State<CreateCustomer> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-      body: Padding(
+    return Padding(
           padding: const EdgeInsets.all(10),
           child: ListView(
             children: <Widget>[
@@ -104,7 +102,7 @@ class _CreateCustomerState extends State<CreateCustomer> {
                     },
                   )),
             ],
-          )),
+          ),
     );
   }
 
