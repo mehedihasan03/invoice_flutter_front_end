@@ -32,19 +32,19 @@ class MyApp extends StatelessWidget {
         MyRoutes.loginRoute: (context) => LoginPage(),
         MyRoutes.signupRoute: (context) => SignUpPage(),
 
-        MyRoutes.dashboard: (context) => Dashboard(),
-        MyRoutes.invoiceListRoute: (context) => InvoiceListPage(),
-        MyRoutes.productsRoute: (context) => ProductsPage(),
-        MyRoutes.customersRoute: (context) => CustomersPage(),
-        MyRoutes.categoriesRoute: (context) => CategoriesPage(),
-
-        MyRoutes.profileRoute: (context) => ProfileUI2(),
-
-        MyRoutes.newInvoiceRoute: (context) => CreateInviocePage(),
-        MyRoutes.addCustomerRoute: (context) => CreateCustomer(),
-
-        MyRoutes.aboutRoute: (context) => AboutPage(),
-        MyRoutes.reportRoute: (context) => ReportPage(),
+        // MyRoutes.dashboard: (context) => Dashboard(),
+        // MyRoutes.invoiceListRoute: (context) => InvoiceListPage(),
+        // MyRoutes.productsRoute: (context) => ProductsPage(),
+        // MyRoutes.customersRoute: (context) => CustomersPage(),
+        // MyRoutes.categoriesRoute: (context) => CategoriesPage(),
+        //
+        // MyRoutes.profileRoute: (context) => ProfileUI2(),
+        //
+        // MyRoutes.newInvoiceRoute: (context) => CreateInviocePage(),
+        // MyRoutes.addCustomerRoute: (context) => CreateCustomer(),
+        //
+        // MyRoutes.aboutRoute: (context) => AboutPage(),
+        // MyRoutes.reportRoute: (context) => ReportPage(),
 
       }
     );

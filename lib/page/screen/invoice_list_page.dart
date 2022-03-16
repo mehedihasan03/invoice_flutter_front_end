@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:invoice_flutter/page/screen/create_customer_page.dart';
+import 'package:invoice_flutter/page/screen/home_page.dart';
 
 import '../../helper/http_helper.dart';
 import '../../helper/my_host_api.dart';
@@ -190,7 +192,7 @@ class _InvoiceListPageState extends State<InvoiceListPage> {
                 // Navigator.of(context).push(MaterialPageRoute(
                 //     builder: (context) => CreateInviocePage()));
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CreateInviocePage()));
+                    MaterialPageRoute(builder: (context) => CreateCustomer()));
               },
               hoverColor: Colors.green,
               foregroundColor: Colors.white,
