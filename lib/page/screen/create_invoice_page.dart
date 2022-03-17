@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:invoice_flutter/page/model/customer.dart';
-import 'package:invoice_flutter/page/screen/home_page.dart';
 
 import '../../helper/http_helper.dart';
 import '../../helper/my_host_api.dart';
@@ -18,6 +17,7 @@ class CreateInviocePage extends StatefulWidget {
 class _CreateInviocePageState extends State<CreateInviocePage> {
   late Customer invoiceCustomer;
   bool selected = false;
+  final _dateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +26,61 @@ class _CreateInviocePageState extends State<CreateInviocePage> {
         padding: EdgeInsets.zero,
         child: Column(
           children: [
+            Row(
+              children: [
+                Flexible(
+                                flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: DateTimePicker(
+                      initialValue: '',
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                      dateLabelText: 'Select date here',
+                      onChanged: (val) => print(val),
+                      validator: (val) {
+                        print(val);
+                        return null;
+                      },
+                      onSaved: (val) => print(val),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: Row(
+                      children: [
+                        Flexible(
+                          flex: 2,
+                          child: Text(
+                              "Invoice No: ",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 2,
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: ""
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ),
+              ],
+            ),
+
             Expanded(
               child: GridView.count(
                 primary: false,
-                padding: const EdgeInsets.all(10),
+                padding: EdgeInsets.all(20),
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
                 crossAxisCount: 2,
