@@ -19,7 +19,7 @@ class CreateProductPage extends StatefulWidget {
 class _CreateProductPageState extends State<CreateProductPage> {
   final _http = HttpHelper();
   List<Category> categories = [];
-  String dropdownValue = 'One';
+  String dropdownValue = 'Select One';
 
   final _productNameController = TextEditingController();
   final _categoryNameController = TextEditingController();
@@ -52,30 +52,29 @@ class _CreateProductPageState extends State<CreateProductPage> {
             ),
           ),
           Container(
-            padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
-            child: DropdownButton<String>(
-              value: dropdownValue,
-              icon: Icon(Icons.arrow_downward),
-              elevation: 16,
-              style: TextStyle(color: Color.fromRGBO(49, 87, 110, 1.0)),
-              underline: Container(
-                height: 2,
-                color: Color.fromRGBO(49, 87, 110, 1.0),
-              ),
-              onChanged: (String? newValue) {
-                setState(() {
-                  dropdownValue = newValue!;
-                });
-              },
-              items: <String>['One', 'Two', 'Free', 'Four']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            )
-          ),
+              padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
+              child: DropdownButton<String>(
+                value: dropdownValue,
+                icon: Icon(Icons.arrow_downward),
+                elevation: 16,
+                style: TextStyle(color: Color.fromRGBO(49, 87, 110, 1.0)),
+                underline: Container(
+                  height: 2,
+                  color: Color.fromRGBO(49, 87, 110, 1.0),
+                ),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownValue = newValue!;
+                  });
+                },
+                items: <String>['Select One', 'Two', 'Free', 'Four']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              )),
           Container(
             padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
             child: TextField(
@@ -94,12 +93,10 @@ class _CreateProductPageState extends State<CreateProductPage> {
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Color.fromRGBO(49, 87, 110, 1.0)
-                ),
+                    primary: Color.fromRGBO(49, 87, 110, 1.0)),
                 child: const Text(
                   'Add',
-                  style:
-                  TextStyle(fontSize: 20.0, fontWeight: FontWeight.w900),
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w900),
                 ),
                 onPressed: () {
                   print(_productNameController.text);
@@ -114,13 +111,12 @@ class _CreateProductPageState extends State<CreateProductPage> {
   }
 
   Future<void> addProduct() async {
-
     String productName = _productNameController.value.text;
     String categoryName = _categoryNameController.value.text;
-    double price =  double.parse(_priceController.value.text);
+    double price = double.parse(_priceController.value.text);
 
-
-    var model = AddProduct(pname: productName, cname: categoryName, price: price);
+    var model =
+        AddProduct(pname: productName, cname: categoryName, price: price);
     String _body = jsonEncode(model.toMap());
 
     try {
